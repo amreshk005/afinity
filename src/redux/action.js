@@ -1,27 +1,48 @@
 import axios from "axios";
-import { FETCH_PRODUCT_REQUEST, FETCH_PRODUCT_SUCCESS, FETCH_PRODUCT_FAILURE } from "./actionTypes";
+import * as actionTypes from "./actionTypes";
 
-const fetchGetRequest = () => {
+export const fetchGetRequest = () => {
   return {
-    type: FETCH_PRODUCT_REQUEST,
+    type: actionTypes.FETCH_PRODUCT_REQUEST,
   };
 };
 
-const fetchGetSuccess = (data) => {
+export const fetchGetSuccess = (data) => {
   return {
-    type: FETCH_PRODUCT_SUCCESS,
+    type: actionTypes.FETCH_PRODUCT_SUCCESS,
     data: data,
   };
 };
 
-const fetchGetFailure = (error) => {
+export const fetchGetFailure = (error) => {
   return {
-    type: FETCH_PRODUCT_FAILURE,
+    type: actionTypes.FETCH_PRODUCT_FAILURE,
     error: error,
   };
 };
 
-const fetchData = (query = "") => {
+export const cartAdder = (product) => {
+  return {
+    type: actionTypes.ADD_PRODUCT_TO_CART,
+    product: product,
+  };
+};
+
+export const cartUpdate = (product) => {
+  return {
+    type: actionTypes.UPDATE_CART,
+    product: product,
+  };
+};
+
+export const cartRemove = (productId) => {
+  return {
+    type: actionTypes.ADD_PRODUCT_TO_CART,
+    productId: productId,
+  };
+};
+
+export const fetchData = (query = "") => {
   return async (dispatch) => {
     dispatch(fetchGetRequest(query));
     return await axios
@@ -34,4 +55,4 @@ const fetchData = (query = "") => {
   };
 };
 
-export { fetchData, fetchGetRequest, fetchGetSuccess, fetchGetFailure };
+// export { fetchData, fetchGetRequest, fetchGetSuccess, fetchGetFailure,cartAdder, };
