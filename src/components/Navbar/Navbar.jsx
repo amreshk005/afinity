@@ -1,12 +1,11 @@
 import React from "react";
 import "antd/dist/antd.css";
 import { Popover, Button } from "antd/es";
-import classes from "./Navbar.module.css";
 
 function Navbar() {
   const text = <span>Title</span>;
   const content = (
-    <div className="" style={{ width: "40rem" }}>
+    <div className="row flex-column m-0" style={{ width: "40rem" }}>
       <div class="card flex-row">
         <img src="..." class="card-img-top" alt="..." />
         <div class="card-body">

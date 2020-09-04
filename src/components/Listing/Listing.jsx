@@ -1,7 +1,18 @@
 import React, { Component } from "react";
+import { fetchData } from "../../redux/action";
+import { connect } from "react-redux";
 
-export default class Listing extends Component {
+class Listing extends Component {
+  // constructor(props) {
+  //   super(props);
+  // }
+  componentDidMount() {
+    this.props.fetchData();
+  }
+
   render() {
+    let { products } = this.props.data;
+    console.log(products);
     return (
       <div className="row justify-content-between flex-nowrap m-0 mt-4">
         <div className="col-4">
@@ -19,18 +30,22 @@ export default class Listing extends Component {
               <div class="card-body">This is some text within a card body.</div>
             </div>
             <div className="row m-0 ">
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((e) => (
-                <div class="card ml-2 mt-3 flex-nowrap" style={{ width: "23%" }}>
-                  <img class="card-img-top" src="..." alt="Card image cap" />
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">
-                      Go somewhere
-                    </a>
+              {!products ? (
+                <div> Loading...</div>
+              ) : (
+                products.map((e) => (
+                  <div class="card ml-2 mt-3 flex-nowrap" style={{ width: "23%" }}>
+                    <img class="card-img-top h-50" src={e.product_image} alt="Card cap" />
+                    <div class="card-body">
+                      <h5 class="card-title">{e.product_name}</h5>
+                      <p>Price: {e.price}</p>
+                      <a href="#" class="btn btn-primary">
+                        Add to Cart
+                      </a>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))
+              )}
             </div>
           </div>
         </div>
@@ -38,3 +53,15 @@ export default class Listing extends Component {
     );
   }
 }
+const mapStateToProps = (state) => {
+  return {
+    data: state.data,
+    isLoading: state.isLoading,
+  };
+};
+const mapDisptachToProps = (dispatch) => {
+  return {
+    fetchData: (payload) => dispatch(fetchData(payload)),
+  };
+};
+export default connect(mapStateToProps, mapDisptachToProps)(Listing);
