@@ -1,0 +1,5 @@
+.dropdown_menu {
+  left: auto !important;
+  right: -10rem;
+  min-width: 40rem;
+}
