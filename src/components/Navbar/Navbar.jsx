@@ -1,7 +1,23 @@
 import React from "react";
+import "antd/dist/antd.css";
+import { Popover, Button } from "antd/es";
 import classes from "./Navbar.module.css";
 
 function Navbar() {
+  const text = <span>Title</span>;
+  const content = (
+    <div className="" style={{ width: "40rem" }}>
+      <div class="card flex-row">
+        <img src="..." class="card-img-top" alt="..." />
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <a href="#" class="btn btn-primary">
+            remove
+          </a>
+        </div>
+      </div>
+    </div>
+  );
   return (
     <>
       <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
@@ -13,33 +29,15 @@ function Navbar() {
         </button>
 
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-          {/* <div className="row m-0"> */}
-          <div class="dropdown pr-lg-5">
-            <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              cart
-            </button>
-            <div class={classes.dropdown_menu + " dropdown-menu"} aria-labelledby="dropdownMenuButton">
-              <div className="col">
-                <div class="card flex-row">
-                  <img class="card-img-top" src="..." alt="Card image cap" />
-                  <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <div className="col">
-                      <button>+</button>
-                      <input type="text" />
-                      <button>-</button>
-                    </div>
-                    <button>remove</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+          <div className="mr-lg-5 pr-lg-5">
+            <Popover placement="bottom" title={text} content={content} trigger="click">
+              <Button>Cart</Button>
+            </Popover>
           </div>
-          <div className="row pr-lg-5 align-items-center">
+          <div className="row pr-lg-5 align-items-center mr-lg-5">
             <div className="border rounded-circle " style={{ height: "45px", width: "45px" }}></div>
             <span className="p-2">Username</span>
           </div>
-          {/* </div> */}
         </div>
       </nav>
     </>
