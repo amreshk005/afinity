@@ -21,6 +21,7 @@ function Navbar(props) {
             <div className="border rounded-circle bg-dark position-absolute text-center text-white" style={{ height: "25px", width: "25px", zIndex: "10", top: "-12px", left: "-12px" }}>
               {props.cart.length}
             </div>
+
             <Popover placement="bottom" title={text} content={<ProductCard />} trigger="click">
               <Button>CART</Button>
             </Popover>

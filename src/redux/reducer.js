@@ -15,10 +15,12 @@ const reducer = (state = initStore, action) => {
         isLoading: true,
       };
     case actionTypes.FETCH_PRODUCT_SUCCESS:
+      let { products } = action.data;
+      localStorage.setItem("data", JSON.stringify(products));
       return {
         ...state,
         isLoading: false,
-        data: action.data,
+        data: products,
         error: state.error,
       };
     case actionTypes.FETCH_PRODUCT_FAILURE:
@@ -37,12 +39,21 @@ const reducer = (state = initStore, action) => {
     case actionTypes.REMOVE_PRODUCT_FROM_CART:
       return {
         ...state,
-        cart: state.cart.filter((item) => item.id !== action.productId),
+        cart: state.cart.filter((item) => item._id !== action.productId),
       };
     case actionTypes.UPDATE_CART:
       return {
         ...state,
         cart: state.cart.map((e) => (e._id === action.product._id ? { ...e, quantity: action.product.quantity } : e)),
+      };
+    case actionTypes.FILTER_DATA:
+      let getjson = JSON.parse(localStorage.getItem("data"));
+      console.log(getjson);
+      let filteredData = getjson.filter((item) => item.category === action.filterType);
+      console.log(filteredData);
+      return {
+        ...state,
+        data: filteredData.length > 0 ? filteredData : getjson,
       };
     default:
       return state;

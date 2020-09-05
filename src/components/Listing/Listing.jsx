@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { fetchData, cartAdder } from "../../redux/action";
+import { fetchData, cartAdder, addFilter } from "../../redux/action";
 import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
 
@@ -8,29 +8,45 @@ class Listing extends Component {
     super(props);
     this.state = {
       category: [],
-      data: [],
+      filter: "Fashion",
     };
   }
   componentDidMount() {
     this.props.fetchData();
   }
-  // shouldComponentUpdate(prevProps, prevState){
-  //   if(prevProps.data != this.state)
-  // }
 
   cartHandler = (item) => {
     console.log(item);
     this.props.cartAdder({ ...item, quantity: 1 });
   };
+
+  FilterHandler = (e) => {
+    let type = e.target.getAttribute("name");
+    this.setState({
+      filter: type === "ShowAll" ? "Fashion" : type,
+    });
+    this.props.addFilter(e.target.getAttribute("name"));
+  };
   render() {
-    let { products } = this.props.data;
+    let products = this.props.data;
+    let realData = JSON.parse(localStorage.getItem("data"));
+    let getCategory = {};
+    realData &&
+      realData.forEach((element) => {
+        if (!getCategory[element.category]) {
+          getCategory[element.category] = 1;
+        }
+      });
+
     return (
       <div className="row justify-content-between flex-nowrap m-0 mt-4">
         <div className="col-4">
-          <div className="col border">
-            {["category1", "category2", "category3"].map((e) => (
+          <div className="col border" style={{ minHeight: "85vh" }}>
+            {[...Object.keys(getCategory), "ShowAll"].map((e) => (
               <div key={uuidv4()} className="card m-2">
-                <div className="card-body">{e}</div>
+                <div name={e} className="card-body text-capitalize " style={{ cursor: "pointer" }} onClick={this.FilterHandler}>
+                  {e}
+                </div>
               </div>
             ))}
           </div>
@@ -38,7 +54,7 @@ class Listing extends Component {
         <div className="col-8 border p-0">
           <div className="col p-0">
             <div className="card m-3 border-0">
-              <h5 className="card-title">Products under all</h5>
+              <h5 className="card-title text-capitalize">Products under {this.state.filter}</h5>
             </div>
             <div className="row m-0 ">
               {!products ? (
@@ -76,6 +92,7 @@ const mapDisptachToProps = (dispatch) => {
   return {
     fetchData: (payload) => dispatch(fetchData(payload)),
     cartAdder: (payload) => dispatch(cartAdder(payload)),
+    addFilter: (payload) => dispatch(addFilter(payload)),
   };
 };
 export default connect(mapStateToProps, mapDisptachToProps)(Listing);

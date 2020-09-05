@@ -37,8 +37,14 @@ export const cartUpdate = (product) => {
 
 export const cartRemove = (productId) => {
   return {
-    type: actionTypes.ADD_PRODUCT_TO_CART,
+    type: actionTypes.REMOVE_PRODUCT_FROM_CART,
     productId: productId,
+  };
+};
+export const addFilter = (filterType) => {
+  return {
+    type: actionTypes.FILTER_DATA,
+    filterType: filterType,
   };
 };
 
@@ -49,6 +55,7 @@ export const fetchData = (query = "") => {
       .get("data/data.json")
       .then((res) => {
         console.log(res.data);
+
         return dispatch(fetchGetSuccess(res.data));
       })
       .catch((err) => console.log(err));
