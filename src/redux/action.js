@@ -48,6 +48,12 @@ export const addFilter = (filterType) => {
   };
 };
 
+export const authHandler = () => {
+  return {
+    type: actionTypes.AUTH_HANDLER,
+  };
+};
+
 export const fetchData = (query = "") => {
   return async (dispatch) => {
     dispatch(fetchGetRequest(query));

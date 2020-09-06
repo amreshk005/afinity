@@ -3,8 +3,10 @@ import * as actionTypes from "./actionTypes";
 const initStore = {
   isLoading: false,
   data: [],
-  error: "",
   cart: [],
+  error: "",
+  isLogin: false,
+  user: {},
 };
 
 const reducer = (state = initStore, action) => {
@@ -54,6 +56,11 @@ const reducer = (state = initStore, action) => {
       return {
         ...state,
         data: filteredData.length > 0 ? filteredData : getjson,
+      };
+    case actionTypes.AUTH_HANDLER:
+      return {
+        ...state,
+        isLogin: !state.isLogin,
       };
     default:
       return state;
