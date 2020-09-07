@@ -4,10 +4,16 @@ Take a Demo:- https://afinity.netlify.app/
 
 ![Image](https://i.imgur.com/JMkC8mm.jpg)
 
-User Activity is Simple React App, where we see the user list and after selecting the user a modal will open where we can the list of activity on different day of different time using calendar.
+This is a Simple React App, where listing page is build for the showing the product list and filtering the items as according to your need and for the adding to cart you need to first login and after that you can your place order.
 
+## Authentication?
+  `username:- amresh`<br>
+  `password:- amresh`
+  
 ## How to Setup?
 
-1. `git clone https://github.com/amreshk005/userActivity.git`
+1. `git clone https://github.com/amreshk005/afinity.git`
 2. `npm install`
 3. `npm start`
+
+
