@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/amreshk005/afinity/static/css/main.3035611a.chunk.css",
+    "main.js": "/amreshk005/afinity/static/js/main.4af59774.chunk.js",
+    "main.js.map": "/amreshk005/afinity/static/js/main.4af59774.chunk.js.map",
+    "runtime-main.js": "/amreshk005/afinity/static/js/runtime-main.689064f1.js",
+    "runtime-main.js.map": "/amreshk005/afinity/static/js/runtime-main.689064f1.js.map",
+    "static/css/2.d4e7eff5.chunk.css": "/amreshk005/afinity/static/css/2.d4e7eff5.chunk.css",
+    "static/js/2.7a774428.chunk.js": "/amreshk005/afinity/static/js/2.7a774428.chunk.js",
+    "static/js/2.7a774428.chunk.js.map": "/amreshk005/afinity/static/js/2.7a774428.chunk.js.map",
+    "index.html": "/amreshk005/afinity/index.html",
+    "precache-manifest.a67ca5a44b5ff32dd3fa5e01222839fd.js": "/amreshk005/afinity/precache-manifest.a67ca5a44b5ff32dd3fa5e01222839fd.js",
+    "service-worker.js": "/amreshk005/afinity/service-worker.js",
+    "static/css/2.d4e7eff5.chunk.css.map": "/amreshk005/afinity/static/css/2.d4e7eff5.chunk.css.map",
+    "static/css/main.3035611a.chunk.css.map": "/amreshk005/afinity/static/css/main.3035611a.chunk.css.map",
+    "static/js/2.7a774428.chunk.js.LICENSE.txt": "/amreshk005/afinity/static/js/2.7a774428.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.689064f1.js",
+    "static/css/2.d4e7eff5.chunk.css",
+    "static/js/2.7a774428.chunk.js",
+    "static/css/main.3035611a.chunk.css",
+    "static/js/main.4af59774.chunk.js"
+  ]
+}
