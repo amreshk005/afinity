@@ -8,3 +8,4 @@ export const UPDATE_CART = "UPDATE_CART";
 
 export const FILTER_DATA = "FILTER_DATA";
 export const AUTH_HANDLER = "AUTH_HANDLER";
+export const EMPTY_CART = "EMPTY_CART";

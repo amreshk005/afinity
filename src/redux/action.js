@@ -53,6 +53,12 @@ export const authHandler = () => {
     type: actionTypes.AUTH_HANDLER,
   };
 };
+export const emptyCart = (userId) => {
+  return {
+    type: actionTypes.EMPTY_CART,
+    userId: userId,
+  };
+};
 
 export const fetchData = (query = "") => {
   return async (dispatch) => {

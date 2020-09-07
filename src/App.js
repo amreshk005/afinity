@@ -6,15 +6,14 @@ import { Component } from "react";
 import Listing from "./components/Listing/Listing";
 import { Route } from "react-router-dom";
 import Checkout from "./components/Checkout/Checkout";
-import Login from "./components/Login/Login";
 
 class App extends Component {
   render() {
     return (
       <div className="container-fluid  p-0">
         <Route render={({ history }) => <Navbar history={history} />} />
-        <Route path="/" exact render={() => <Listing />} />
-        <Route path="/checkout" render={() => <Checkout />} />
+        <Route path="/" exact render={({ history }) => <Listing history={history} />} />
+        <Route path="/checkout" render={({ history }) => <Checkout history={history} />} />
       </div>
     );
   }

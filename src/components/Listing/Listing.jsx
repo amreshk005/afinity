@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { fetchData, cartAdder, addFilter } from "../../redux/action";
+import { fetchData, cartAdder, addFilter, authHandler } from "../../redux/action";
 import { connect } from "react-redux";
 import { v4 as uuidv4 } from "uuid";
+import Login from "../Login/Login";
 
 class Listing extends Component {
   constructor(props) {
@@ -9,15 +10,34 @@ class Listing extends Component {
     this.state = {
       category: [],
       filter: "Fashion",
+      loading: false,
+      visible: false,
     };
   }
+  showModal = () => {
+    this.setState({
+      visible: true,
+    });
+  };
+
+  handleOk = () => {
+    this.setState({ loading: true });
+    this.setState({ loading: false, visible: false });
+    this.props.authHandler();
+    this.props.history.push({ pathname: "/" });
+  };
+
+  handleCancel = () => {
+    this.setState({ visible: false });
+  };
   componentDidMount() {
     this.props.fetchData();
   }
 
   cartHandler = (item) => {
     console.log(item);
-    this.props.cartAdder({ ...item, quantity: 1 });
+    let userId = JSON.parse(localStorage.getItem("userId"));
+    this.props.cartAdder({ userId: userId, selectedItem: { ...item, quantity: 1 } });
   };
 
   FilterHandler = (e) => {
@@ -28,6 +48,7 @@ class Listing extends Component {
     this.props.addFilter(e.target.getAttribute("name"));
   };
   render() {
+    const { visible, loading } = this.state;
     let products = this.props.data;
     let realData = JSON.parse(localStorage.getItem("data"));
     let getCategory = {};
@@ -38,6 +59,7 @@ class Listing extends Component {
         }
       });
 
+    console.log(this.props);
     return (
       <div className="row m-0 mt-4 flex-column flex-sm-column flex-md-column  flex-lg-row justify-content-between flex-nowrap">
         <div className="col-12 col-sm-12 col-md-12 col-lg-4">
@@ -69,9 +91,18 @@ class Listing extends Component {
                           <h5 className="card-title text-capitalize">{item.product_name}</h5>
                           <p>Price: {item.price}</p>
                         </div>
-                        <button className="btn btn-dark pl-4 pr-5 text-center rounded-0" onClick={() => this.cartHandler(item)}>
-                          Add to Cart
-                        </button>
+                        {this.props.isLogin ? (
+                          <button className="btn btn-dark pl-4 pr-5 text-center rounded-0" onClick={() => this.cartHandler(item)}>
+                            Add to Cart
+                          </button>
+                        ) : (
+                          <>
+                            <button className="btn btn-dark pl-4 pr-5 text-center rounded-0" onClick={this.showModal}>
+                              Add to Cart
+                            </button>
+                            <Login visible={visible} loading={loading} handleOk={this.handleOk} handleCancel={this.handleCancel} />
+                          </>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -88,6 +119,7 @@ const mapStateToProps = (state) => {
   return {
     data: state.data,
     isLoading: state.isLoading,
+    isLogin: state.isLogin,
   };
 };
 const mapDisptachToProps = (dispatch) => {
@@ -95,6 +127,7 @@ const mapDisptachToProps = (dispatch) => {
     fetchData: (payload) => dispatch(fetchData(payload)),
     cartAdder: (payload) => dispatch(cartAdder(payload)),
     addFilter: (payload) => dispatch(addFilter(payload)),
+    authHandler: (payload) => dispatch(authHandler(payload)),
   };
 };
 export default connect(mapStateToProps, mapDisptachToProps)(Listing);

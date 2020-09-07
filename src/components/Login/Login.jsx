@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { authHandler } from "../../redux/action";
 import { connect } from "react-redux";
+import "antd/dist/antd.css";
+import { Button, Modal } from "antd/es";
 
 class Login extends Component {
   constructor(props) {
@@ -17,51 +19,69 @@ class Login extends Component {
     });
   };
   submitHandler = (e) => {
+    let found = false;
     e.preventDefault();
     let { username, password } = this.state;
     console.log(username, password);
-    if (username === "amresh" && password === "amresh") {
-      this.props.authHandler();
-      this.props.history.push({ pathname: "/" });
-    } else {
+    this.props.user.forEach((e) => {
+      if (e.username === "amresh" && e.password === "amresh") {
+        localStorage.setItem("userId", JSON.stringify(e.id));
+        localStorage.setItem("username", JSON.stringify(e.username));
+        this.props.handleOk();
+        found = true;
+      }
+    });
+    if (found === false) {
       alert("Please Enter correct username and password");
     }
   };
 
   render() {
-    console.log(this.props);
+    let { visible, loading, handleCancel } = this.props;
     return (
       <>
-        <div className="modal fade" id="loginModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div className="modal-dialog modal-dialog-centered" role="document">
-            <div className="modal-content p-5">
-              <form>
-                <div className="form-group">
-                  <label htmlFor="exampleInputEmail1">Username</label>
-                  <input name="username" type="text" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" value={this.state.username} onChange={this.inputHandler} />
-                  <small id="emailHelp" className="form-text text-muted">
-                    We'll never share your email with anyone else.
-                  </small>
-                </div>
-                <div className="form-group">
-                  <label htmlFor="exampleInputPassword1">Password</label>
-                  <input name="password" type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" value={this.state.password} onChange={this.inputHandler} />
-                </div>
-                <button type="submit" className="btn btn-primary" onClick={this.submitHandler}>
-                  Submit
-                </button>
-              </form>
+        <Modal
+          visible={visible}
+          title="Title"
+          onOk={this.submitHandler}
+          onCancel={handleCancel}
+          footer={[
+            <Button key="back" onClick={handleCancel}>
+              Cancel
+            </Button>,
+            <Button key="submit" type="primary" loading={loading} onClick={this.submitHandler}>
+              Login
+            </Button>,
+          ]}
+        >
+          <form>
+            <div className="form-group">
+              <label>Username</label>
+              <input name="username" type="text" className="form-control" aria-describedby="emailHelp" placeholder="Enter email" value={this.state.username} onChange={this.inputHandler} />
+              <small id="emailHelp" className="form-text text-muted">
+                We'll never share your email with anyone else.
+              </small>
             </div>
-          </div>
-        </div>
+            <div className="form-group">
+              <label>Password</label>
+              <input name="password" type="password" className="form-control" placeholder="Password" value={this.state.password} onChange={this.inputHandler} />
+            </div>
+          </form>
+        </Modal>
       </>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
 
 const mapDisptachToProps = (dispatch) => {
   return {
     authHandler: (payload) => dispatch(authHandler(payload)),
   };
 };
-export default connect(null, mapDisptachToProps)(Login);
+export default connect(mapStateToProps, mapDisptachToProps)(Login);
