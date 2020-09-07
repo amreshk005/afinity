@@ -4,7 +4,6 @@ import { emptyCart } from "../../redux/action";
 import { connect } from "react-redux";
 
 function Checkout(props) {
-  console.log(props);
   const [totalPrice, setTotalPrice] = useState(0);
   let { location } = props.history;
 
@@ -22,11 +21,11 @@ function Checkout(props) {
   return (
     <div className="d-flex justify-content-center mt-5">
       <Productcard location={location.pathname} />
-      <div class="card w-25 h-50 ml-3">
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Total Price: {totalPrice}</li>
+      <div className="card w-25 h-50 ml-3">
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item">Total Price: {totalPrice}</li>
         </ul>
-        <button type="button" class="btn btn-success" onClick={handleOrder}>
+        <button type="button" className="btn btn-success" onClick={handleOrder}>
           Place Order
         </button>
       </div>

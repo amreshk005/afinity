@@ -35,7 +35,6 @@ class Listing extends Component {
   }
 
   cartHandler = (item) => {
-    console.log(item);
     let userId = JSON.parse(localStorage.getItem("userId"));
     this.props.cartAdder({ userId: userId, selectedItem: { ...item, quantity: 1 } });
   };
@@ -59,7 +58,6 @@ class Listing extends Component {
         }
       });
 
-    console.log(this.props);
     return (
       <div className="row m-0 mt-4 flex-column flex-sm-column flex-md-column  flex-lg-row justify-content-between flex-nowrap">
         <div className="col-12 col-sm-12 col-md-12 col-lg-4">

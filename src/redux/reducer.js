@@ -1,12 +1,11 @@
 import * as actionTypes from "./actionTypes";
-import Item from "antd/es/list/Item";
 
 const initStore = {
   isLoading: false,
   data: [],
   cart: [],
   error: "",
-  isLogin: true,
+  isLogin: false,
   user: [
     {
       id: "aisdno",
@@ -113,7 +112,6 @@ const reducer = (state = initStore, action) => {
         isLogin: !state.isLogin,
       };
     case actionTypes.EMPTY_CART:
-      console.log(action.userId);
       let newCart = state.user.map((e) => {
         if (e.id === action.userId) {
           e.cart = [];

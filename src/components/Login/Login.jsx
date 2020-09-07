@@ -21,12 +21,9 @@ class Login extends Component {
   submitHandler = (e) => {
     let found = false;
     e.preventDefault();
-    let { username, password } = this.state;
-    console.log(username, password);
     this.props.user.forEach((e) => {
       if (e.username === "amresh" && e.password === "amresh") {
         localStorage.setItem("userId", JSON.stringify(e.id));
-        localStorage.setItem("username", JSON.stringify(e.username));
         this.props.handleOk();
         found = true;
       }

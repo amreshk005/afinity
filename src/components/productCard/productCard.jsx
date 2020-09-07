@@ -23,7 +23,6 @@ function ProductCard(props) {
     }
     props.cartUpdate({ userId: userId, item: { ...item, quantity: quantity } });
   }
-  console.log(props);
   return (
     <>
       <div className="row flex-column m-0 flex-nowrap" style={{ width: "40rem", height: "30rem", overflow: "scroll" }}>
@@ -62,7 +61,7 @@ function ProductCard(props) {
             </div>
             {props.location !== "/checkout" ? (
               <Link to={(history) => ({ ...history.location, pathname: "/checkout" })} className="w-100">
-                <button type="button" class="btn btn-danger w-100" onClick={props.hide}>
+                <button type="button" className="btn btn-danger w-100" onClick={props.hide}>
                   Checkout
                 </button>
               </Link>

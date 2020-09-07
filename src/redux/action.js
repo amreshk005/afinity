@@ -66,8 +66,6 @@ export const fetchData = (query = "") => {
     return await axios
       .get("data/data.json")
       .then((res) => {
-        console.log(res.data);
-
         return dispatch(fetchGetSuccess(res.data));
       })
       .catch((err) => console.log(err));

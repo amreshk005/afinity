@@ -13,26 +13,9 @@ class Navbar extends Component {
     this.state = {
       visible: false,
       badge: false,
-      username: "username",
     };
   }
 
-  componentDidMount() {
-    this.setState({ username: JSON.parse(localStorage.getItem("username")) });
-  }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    let { location } = nextProps.history;
-    console.log(location);
-    if (location.pathname === "/checkout") {
-      console.log("hello");
-    }
-    return null;
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return true;
-  }
   showModal = () => {
     this.setState({
       visible: true,
@@ -50,7 +33,6 @@ class Navbar extends Component {
   };
 
   hide = () => {
-    console.log("hide");
     this.setState({
       badge: false,
     });
@@ -95,7 +77,7 @@ class Navbar extends Component {
                   <div className="border rounded-circle bg-dark" style={{ height: "45px", width: "45px" }}></div>
                   <li className="nav-item dropdown list-group">
                     <span className="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      {this.state.username}
+                      Username
                     </span>
                     <div className="dropdown-menu" aria-labelledby="navbarDropdown">
                       <span className="dropdown-item" onClick={this.handleOk}>
