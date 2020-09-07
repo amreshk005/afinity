@@ -1,8 +1,8 @@
 # User Acitvity
 
-Take a Demo:- https://fullthrotle.netlify.app/
+Take a Demo:- https://afinity.netlify.app/
 
-![Image](https://i.imgur.com/cF9lK81.jpg)
+![Image](https://i.imgur.com/JMkC8mm.jpg)
 
 User Activity is Simple React App, where we see the user list and after selecting the user a modal will open where we can the list of activity on different day of different time using calendar.
 
